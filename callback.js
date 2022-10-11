@@ -34,6 +34,7 @@ const getUsers = () => {
     return new Promise(async (resolve, reject) => {
         const { data } = await axios("https://jsonplaceholder.typicode.com/users");
         resolve(data);
+        //reject("Bir sorun oluştu")
 
     });
 }
@@ -44,20 +45,28 @@ const getPost = (post_id) => {
         "https://jsonplaceholder.typicode.com/posts/"+ post_id
         );
         resolve(data);
+        //reject("Bir sorun daha oluştu")
 
     });
 };
 
-(async () => {
+/*(async () => {
 
+try{
 const users = await getUsers();
-
-
 const post = await getPost(1);
 
-
 console.log(users);
-console.log(post);
+console.log(post);     
+}
+
+catch(e){
+        console.log(e);
+    }
 
 })();
+*/
 
+Promise.all([getUsers(),getPost(1)])
+.then(console.log)
+.catch(console.log);
