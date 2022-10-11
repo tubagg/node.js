@@ -14,8 +14,10 @@ sayHi(()=>{
     console.log("Hello");
 });*/
 
-/*import fetch from "node-fetch";
+//import fetch from "node-fetch";
+import axios from "axios";
 
+/*
 fetch("https://jsonplaceholder.typicode.com/users")
 .then((data) => data.json())
 .then((users) => {
@@ -28,15 +30,34 @@ fetch("https://jsonplaceholder.typicode.com/users")
 });*/
 
 
-const getComments = (number) => {
-    return new Promise((resolve,reject)=>{
-        if(number == 1){
-            resolve({text:"Selam"});
-        }
-        reject("Bir problem oluşu!");  
-    });   
+const getUsers = () => {
+    return new Promise(async (resolve, reject) => {
+        const { data } = await axios("https://jsonplaceholder.typicode.com/users");
+        resolve(data);
+
+    });
+}
+
+const getPost = (post_id) => {
+    return new Promise(async (resolve, reject) => {
+        const { data } = await axios(
+        "https://jsonplaceholder.typicode.com/posts/"+ post_id
+        );
+        resolve(data);
+
+    });
 };
-getComments(2)
-.then((data) => console.log(data))
-.catch((e) => console.log(e));
+
+(async () => {
+
+const users = await getUsers();
+
+
+const post = await getPost(1);
+
+
+console.log(users);
+console.log(post);
+
+})();
 
