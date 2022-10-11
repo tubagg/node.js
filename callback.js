@@ -14,7 +14,7 @@ sayHi(()=>{
     console.log("Hello");
 });*/
 
-import fetch from "node-fetch";
+/*import fetch from "node-fetch";
 
 fetch("https://jsonplaceholder.typicode.com/users")
 .then((data) => data.json())
@@ -25,6 +25,18 @@ fetch("https://jsonplaceholder.typicode.com/users")
     .then(data => data.json())
     .then(posts => console.log("Postlar yüklendi.",posts));
 
+});*/
 
-});
+
+const getComments = (number) => {
+    return new Promise((resolve,reject)=>{
+        if(number == 1){
+            resolve({text:"Selam"});
+        }
+        reject("Bir problem oluşu!");  
+    });   
+};
+getComments(2)
+.then((data) => console.log(data))
+.catch((e) => console.log(e));
 
